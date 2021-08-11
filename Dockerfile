@@ -8,4 +8,4 @@ RUN tar xvf flutter_linux_${VERSION}-stable.tar.xz
 RUN rm flutter_linux_${VERSION}-stable.tar.xz
 
 ENV PATH $PATH:/flutter/bin/cache/dart-sdk/bin:/flutter/bin
-
+RUN flutter precache
