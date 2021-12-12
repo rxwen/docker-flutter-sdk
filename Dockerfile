@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 MAINTAINER Raymond Wen
 
-ENV VERSION 2.5.3
+ENV VERSION 2.8.0
 RUN apt-get update && apt-get install -y curl make git bzip2 xz-utils wget unzip
 RUN wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_${VERSION}-stable.tar.xz
 RUN tar xvf flutter_linux_${VERSION}-stable.tar.xz
