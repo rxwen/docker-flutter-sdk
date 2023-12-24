@@ -15,6 +15,9 @@ RUN wget https://github.com/leoafarias/fvm/releases/download/2.4.1/fvm-2.4.1-lin
 RUN tar xvf fvm-2.4.1-linux-x64.tar.gz
 RUN mv fvm/fvm /usr/local/bin
 RUN rm -rf fvm*
+RUN fvm install ${VERSION}
+RUN fvm global ${VERSION}
+RUN fvm flutter doctor -v
 
 # https://download.java.net/java/GA/jdk19.0.1/afdd2e245b014143b62ccb916125e3ce/10/GPL/openjdk-19.0.1_linux-x64_bin.tar.gz
 RUN wget https://download.java.net/java/GA/jdk17.0.2/dfd4a8d0985749f896bed50d7138ee7f/8/GPL/openjdk-17.0.2_linux-x64_bin.tar.gz
