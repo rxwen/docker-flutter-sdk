@@ -19,6 +19,11 @@ RUN fvm install ${VERSION}
 RUN fvm global ${VERSION}
 RUN fvm flutter doctor -v
 
+RUN wget https://github.com/realm/SwiftLint/releases/download/0.54.0/swiftlint_linux.zip
+RUN unzip swiftlint_linux.zip
+RUN mv swiftlint /usr/local/bin
+RUN rm -rf swiftlint_linux.zip LICENSE
+
 # https://download.java.net/java/GA/jdk19.0.1/afdd2e245b014143b62ccb916125e3ce/10/GPL/openjdk-19.0.1_linux-x64_bin.tar.gz
 RUN wget https://download.java.net/java/GA/jdk17.0.2/dfd4a8d0985749f896bed50d7138ee7f/8/GPL/openjdk-17.0.2_linux-x64_bin.tar.gz
 RUN tar xvf openjdk-17.0.2_linux-x64_bin.tar.gz
