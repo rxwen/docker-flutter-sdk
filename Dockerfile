@@ -11,10 +11,16 @@ ENV PATH $PATH:/flutter/bin/cache/dart-sdk/bin:/flutter/bin
 RUN git config --global --add safe.directory /flutter
 RUN flutter precache
 
+RUN wget https://github.com/leoafarias/fvm/releases/download/2.4.1/fvm-2.4.1-linux-x64.tar.gz
+RUN tar xvf fvm-2.4.1-linux-x64.tar.gz
+RUN mv fvm/fvm /usr/local/bin
+RUN rm -rf fvm*
+
 # https://download.java.net/java/GA/jdk19.0.1/afdd2e245b014143b62ccb916125e3ce/10/GPL/openjdk-19.0.1_linux-x64_bin.tar.gz
 RUN wget https://download.java.net/java/GA/jdk17.0.2/dfd4a8d0985749f896bed50d7138ee7f/8/GPL/openjdk-17.0.2_linux-x64_bin.tar.gz
 RUN tar xvf openjdk-17.0.2_linux-x64_bin.tar.gz
 RUN mv jdk-17.0.2/ /opt/jdk
+RUN rm -rf openjdk-17.0.2_linux-x64_bin.tar.gz
 
 ENV JAVA_HOME /opt/jdk
 ENV PATH $JAVA_HOME/bin:$PATH
