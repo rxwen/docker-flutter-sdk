@@ -1,7 +1,7 @@
 FROM swift:5.9.2
 MAINTAINER Raymond Wen
 
-ENV VERSION 3.16.5
+ENV VERSION 3.16.6
 RUN apt-get update && apt-get install -y curl make git bzip2 xz-utils wget unzip
 RUN wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_${VERSION}-stable.tar.xz
 RUN tar xvf flutter_linux_${VERSION}-stable.tar.xz
