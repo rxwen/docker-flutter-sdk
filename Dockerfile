@@ -1,7 +1,8 @@
 FROM swift:5.9.2
 MAINTAINER Raymond Wen
 
-ENV VERSION 3.16.6
+ENV VERSION 3.16.7
+ENV FLUTTER_ROOT /root/fvm/versions/${VERSION}
 RUN apt-get update && apt-get install -y curl make git bzip2 xz-utils wget unzip
 RUN wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_${VERSION}-stable.tar.xz
 RUN tar xvf flutter_linux_${VERSION}-stable.tar.xz
@@ -19,7 +20,7 @@ RUN fvm install ${VERSION}
 RUN fvm global ${VERSION}
 RUN fvm flutter doctor -v
 
-RUN wget https://github.com/realm/SwiftLint/releases/download/0.54.0/swiftlint_linux.zip
+RUN wget https://github.com/realm/SwiftLint/releases/download/0.58.2/swiftlint_linux.zip
 RUN unzip swiftlint_linux.zip
 RUN mv swiftlint /usr/local/bin
 RUN rm -rf swiftlint_linux.zip LICENSE
@@ -33,12 +34,12 @@ RUN rm -rf openjdk-17.0.2_linux-x64_bin.tar.gz
 ENV JAVA_HOME /opt/jdk
 ENV PATH $JAVA_HOME/bin:$PATH
 
-RUN wget https://github.com/pinterest/ktlint/releases/download/1.1.0/ktlint-1.1.0.zip
-RUN unzip ktlint-1.1.0.zip
-RUN mv ktlint-1.1.0/bin/ktlint /usr/local/bin
+RUN wget https://github.com/pinterest/ktlint/releases/download/1.5.0/ktlint-1.5.0.zip
+RUN unzip ktlint-1.5.0.zip
+RUN mv ktlint-1.5.0/bin/ktlint /usr/local/bin
 RUN rm -rf ktlint*
 
-ENV SWIFT_FORMAT_VERSION=509.0.0
+ENV SWIFT_FORMAT_VERSION=600.0.0
 RUN apt-get update && apt-get install -y curl make git bzip2 xz-utils wget unzip
 RUN git clone https://github.com/apple/swift-format.git
 RUN cd swift-format && git checkout $SWIFT_FORMAT_VERSION
