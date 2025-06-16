@@ -1,26 +1,26 @@
 FROM swift:5.9.2
 MAINTAINER Raymond Wen
 
-ENV VERSION 3.16.7
+ENV VERSION 3.32.4
+ENV FVM_VERSION 3.2.1
 ENV FLUTTER_ROOT /root/fvm/versions/${VERSION}
 RUN apt-get update && apt-get install -y curl make git bzip2 xz-utils wget unzip
 RUN wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_${VERSION}-stable.tar.xz
 RUN tar xvf flutter_linux_${VERSION}-stable.tar.xz
 RUN rm flutter_linux_${VERSION}-stable.tar.xz
 
-ENV PATH $PATH:/flutter/bin/cache/dart-sdk/bin:/flutter/bin
+ENV PATH $PATH:${FLUTTER_ROOT}/bin/cache/dart-sdk/bin:${FLUTTER_ROOT}/bin
 RUN git config --global --add safe.directory /flutter
 RUN flutter precache
 
-RUN wget https://github.com/leoafarias/fvm/releases/download/2.4.1/fvm-2.4.1-linux-x64.tar.gz
-RUN tar xvf fvm-2.4.1-linux-x64.tar.gz
-RUN mv fvm/fvm /usr/local/bin
+RUN wget https://github.com/leoafarias/fvm/releases/download/${FVM_VERSION}/fvm-${FVM_VERSION}-linux-x64.tar.gz
+RUN tar xvf fvm-${FVM_VERSION}-linux-x64.tar.gz
+RUN cp -rf fvm/* /usr/local/bin
 RUN rm -rf fvm*
-RUN fvm install ${VERSION}
 RUN fvm global ${VERSION}
 RUN fvm flutter doctor -v
 
-RUN wget https://github.com/realm/SwiftLint/releases/download/0.58.2/swiftlint_linux.zip
+RUN wget https://github.com/realm/SwiftLint/releases/download/0.59.1/swiftlint_linux.zip
 RUN unzip swiftlint_linux.zip
 RUN mv swiftlint /usr/local/bin
 RUN rm -rf swiftlint_linux.zip LICENSE
@@ -34,9 +34,9 @@ RUN rm -rf openjdk-17.0.2_linux-x64_bin.tar.gz
 ENV JAVA_HOME /opt/jdk
 ENV PATH $JAVA_HOME/bin:$PATH
 
-RUN wget https://github.com/pinterest/ktlint/releases/download/1.5.0/ktlint-1.5.0.zip
-RUN unzip ktlint-1.5.0.zip
-RUN mv ktlint-1.5.0/bin/ktlint /usr/local/bin
+RUN wget https://github.com/pinterest/ktlint/releases/download/1.6.0/ktlint-1.6.0.zip
+RUN unzip ktlint-1.6.0.zip
+RUN mv ktlint-1.6.0/bin/ktlint /usr/local/bin
 RUN rm -rf ktlint*
 
 ENV SWIFT_FORMAT_VERSION=600.0.0
