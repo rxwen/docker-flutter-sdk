@@ -1,8 +1,8 @@
-FROM swift:5.9.2
+FROM swift:6.1.2
 MAINTAINER Raymond Wen
 
 ENV VERSION 3.32.4
-ENV FVM_VERSION 3.2.1
+ENV FVM_VERSION 4.0.1
 ENV FLUTTER_ROOT /root/fvm/versions/${VERSION}
 RUN apt-get update && apt-get install -y curl make git bzip2 xz-utils wget unzip
 RUN wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_${VERSION}-stable.tar.xz
